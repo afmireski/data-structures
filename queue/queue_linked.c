@@ -194,24 +194,26 @@ Queue *queue_clone(Queue *q)
         return false;
     }
 
-    Queue* q2 = (Queue*) malloc(sizeof(Queue));
+    Queue *q2 = (Queue *)malloc(sizeof(Queue));
 
-    Node* temp1 = q->begin;
+    Node *temp1 = q->begin;
 
-    q2->begin = (Queue*) malloc(sizeof(Queue));
-    Node* temp2 = q2->begin;
+    q2->begin = (Queue *)malloc(sizeof(Queue));
+    Node *temp2 = q2->begin;
 
-    while (true) {
+    while (true)
+    {
         temp2->data = temp1->data;
         temp2->next = NULL;
 
         temp1 = temp1->next;
-        if (temp1 == NULL) {
+        if (temp1 == NULL)
+        {
             q2->end = temp2;
             break;
         }
 
-        temp2->next = (Node*) malloc(sizeof(Node));
+        temp2->next = (Node *)malloc(sizeof(Node));
         temp2 = temp2->next;
     }
 
@@ -220,6 +222,39 @@ Queue *queue_clone(Queue *q)
     return q2;
 }
 
-bool queue_toString(Queue *q, char *str);
+bool queue_toString(Queue *q, char *str)
+{
+    if (q == NULL)
+    {
+        printf("Error, the queue cannot be null!!!\n");
+        return false;
+    }
+    else if (q->qty == 0)
+    {
+        printf("Error, the queue is empty!!!\n");
+        return false;
+    }
+
+    char buffer[50];
+
+    *str = '\0';
+    strcat(str, "| ");
+
+    Node *temp = q->begin;
+
+    while (temp != NULL)
+    {
+        sprintf(buffer, "%d", temp->data);
+        strcat(str, buffer);
+
+        if (temp->next != NULL) {
+            strcat(str, ", ");
+        }
+
+        temp = temp->next;
+    }
+
+    return true;
+}
 
 bool queue_insertMany(Queue *q, any *vector, int len);
