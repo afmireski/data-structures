@@ -30,7 +30,10 @@ int main() {
     printf("\n\n");
     // test_queue_remove();
     printf("\n\n");    
-    test_queue_clone();
+    // test_queue_clone();
+    printf("\n\n");
+    test_queue_toString();
+    
     
     
     printf("/****************** END ********************/\n");
@@ -144,4 +147,30 @@ void test_queue_clone() {
 
     queue_destroy(&q);
     queue_destroy(&q2);
+}
+
+void test_queue_toString() {
+    printf("/***********************************************\n");
+    printf("TEST: TO STRING\n");
+    printf("/***********************************************\n\n");
+    
+    Queue* q = NULL;
+    char str[100];
+
+    
+    verify(queue_toString(q, str) == false, "Should return false because the Queue is NULL");
+
+    q = queue_create();
+
+    verify(queue_toString(q, str) == false, "Should return false because the Queue is empty");
+
+    for (int i = 1; i <= 3; i++) {
+        queue_insert(q, i);
+    }
+    
+    verify(queue_toString(q, str) == true, "Should return true because the Queue was converted to string");
+
+    verify(strcmp(str, "| 1, 2, 3") == 0, "The generated string should be equals \"| 1, 2, 3\"");
+
+    queue_destroy(&q);
 }
