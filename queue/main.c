@@ -27,7 +27,8 @@ int main() {
     // test_queue_create_and_destroy();
     printf("\n\n");
     // test_queue_insert();
-    
+    printf("\n\n");
+    test_queue_remove();
     
     printf("/****************** END ********************/\n");
     return 0;
@@ -75,6 +76,32 @@ void test_queue_insert() {
     queue_print(q);
 
     verify(queue_size(q) == 3, "Queue size should be equals 3");
+
+    queue_destroy(&q);
+}
+
+void test_queue_remove() {
+    printf("/***********************************************\n");
+    printf("TEST: REMOVE\n");
+    printf("/***********************************************\n\n");
+    
+    Queue* q = NULL;
+    any output;
+
+    
+    verify(queue_remove(q, &output) == false, "Should return false because the Queue is NULL");
+
+    q = queue_create();
+
+    verify(queue_remove(q, &output) == false, "Should return false because the Queue is empty");
+
+    for (int i = 1; i <= 3; i++) {
+        queue_insert(q, i);
+    }
+
+    verify(queue_remove(q, &output) == true, "Should return true because a element was removed");
+    verify(output == 1, "The removed element should be equal 1");    
+    verify(queue_size(q) == 2, "Queue new size should be equals 2");
 
     queue_destroy(&q);
 }
