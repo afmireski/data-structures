@@ -24,7 +24,10 @@ int main() {
     printf("/***********************************************\n");
     printf("QUEUE\n");
     printf("/***********************************************\n\n");
-    test_queue_create_and_destroy();
+    // test_queue_create_and_destroy();
+    printf("\n\n");
+    // test_queue_insert();
+    
     
     printf("/****************** END ********************/\n");
     return 0;
@@ -54,3 +57,24 @@ void test_queue_create_and_destroy() {
     verify(q == NULL, "Should destroy the Queue");
 }
 
+void test_queue_insert() {
+    printf("/***********************************************\n");
+    printf("TEST: INSERT\n");
+    printf("/***********************************************\n\n");
+    Queue* q = NULL;
+
+    verify(queue_insert(q, 0) == false, "Should return false because the Queue is NULL");
+
+    q = queue_create();
+
+    verify(queue_insert(q, 1) == true, "Should return true because a single element was inserted");
+
+    for (int i = 2; i <= 3; i++) {
+        queue_insert(q, i);
+    }
+    queue_print(q);
+
+    verify(queue_size(q) == 3, "Queue size should be equals 3");
+
+    queue_destroy(&q);
+}
