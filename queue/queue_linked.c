@@ -105,7 +105,7 @@ bool queue_remove(Queue *q, any *output)
 
     Node *begin = q->begin;
 
-    output = begin->data;
+    *output = begin->data;
 
     q->begin = begin->next;
 
@@ -198,7 +198,7 @@ Queue *queue_clone(Queue *q)
 
     Node *temp1 = q->begin;
 
-    q2->begin = (Queue *)malloc(sizeof(Queue));
+    q2->begin = (Node *)malloc(sizeof(Node));
     Node *temp2 = q2->begin;
 
     while (true)
