@@ -92,6 +92,9 @@ bool queue_remove(Queue *q, any *output) {
     {
         printf("Error, the queue cannot be null!!!\n");
         return false;
+    } else if (q->qty == 0) {
+        printf("Error, the queue is empty!!!\n");
+        return false;
     }
 
     Node* begin = q->begin;
@@ -102,6 +105,8 @@ bool queue_remove(Queue *q, any *output) {
 
     begin->next = NULL;
     free(begin);
+    
+    q->qty--;
 
     return true;
 }
