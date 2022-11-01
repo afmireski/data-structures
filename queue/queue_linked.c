@@ -75,9 +75,12 @@ bool queue_insert(Queue *q, any element)
 
     Node *new_node = newNode(element, NULL);
 
-    if (q->qty == 0) {
+    if (q->qty == 0)
+    {
         q->begin = new_node;
-    } else {
+    }
+    else
+    {
         q->end->next = new_node;
     }
 
@@ -87,17 +90,20 @@ bool queue_insert(Queue *q, any element)
     return true;
 }
 
-bool queue_remove(Queue *q, any *output) {
+bool queue_remove(Queue *q, any *output)
+{
     if (q == NULL)
     {
         printf("Error, the queue cannot be null!!!\n");
         return false;
-    } else if (q->qty == 0) {
+    }
+    else if (q->qty == 0)
+    {
         printf("Error, the queue is empty!!!\n");
         return false;
     }
 
-    Node* begin = q->begin;
+    Node *begin = q->begin;
 
     output = begin->data;
 
@@ -111,12 +117,15 @@ bool queue_remove(Queue *q, any *output) {
     return true;
 }
 
-bool queue_getFirst(Queue *q, any *output) {
+bool queue_getFirst(Queue *q, any *output)
+{
     if (q == NULL)
     {
         printf("Error, the queue cannot be null!!!\n");
         return false;
-    } else if (q->qty == 0) {
+    }
+    else if (q->qty == 0)
+    {
         printf("Error, the queue is empty!!!\n");
         return false;
     }
@@ -126,7 +135,8 @@ bool queue_getFirst(Queue *q, any *output) {
     return true;
 }
 
-bool queue_isEmpty(Queue *q) {
+bool queue_isEmpty(Queue *q)
+{
     if (q == NULL)
     {
         printf("Error, the queue cannot be null!!!\n");
@@ -136,7 +146,8 @@ bool queue_isEmpty(Queue *q) {
     return q->qty == 0;
 }
 
-int queue_size(Queue *q) {
+int queue_size(Queue *q)
+{
     if (q == NULL)
     {
         printf("Error, the queue cannot be null!!!\n");
@@ -146,18 +157,23 @@ int queue_size(Queue *q) {
     return q->qty;
 }
 
-void queue_print(Queue *q) {
+void queue_print(Queue *q)
+{
     if (q == NULL)
     {
         printf("Error, the queue cannot be null!!!\n");
-    } else if (q->qty == 0) {
+    }
+    else if (q->qty == 0)
+    {
         printf("Error, the queue is empty!!!\n");
-    } else {
-        Node* temp = q->begin;
-
+    }
+    else
+    {
+        Node *temp = q->begin;
 
         printf("<-< ");
-        while(temp != NULL) {
+        while (temp != NULL)
+        {
             printf(" %d", temp->data);
             temp = temp->next;
         }
@@ -165,7 +181,44 @@ void queue_print(Queue *q) {
     }
 }
 
-Queue *queue_clone(Queue *q);
+Queue *queue_clone(Queue *q)
+{
+    if (q == NULL)
+    {
+        printf("Error, the queue cannot be null!!!\n");
+        return false;
+    }
+    else if (q->qty == 0)
+    {
+        printf("Error, the queue is empty!!!\n");
+        return false;
+    }
+
+    Queue* q2 = (Queue*) malloc(sizeof(Queue));
+
+    Node* temp1 = q->begin;
+
+    q2->begin = (Queue*) malloc(sizeof(Queue));
+    Node* temp2 = q2->begin;
+
+    while (true) {
+        temp2->data = temp1->data;
+        temp2->next = NULL;
+
+        temp1 = temp1->next;
+        if (temp1 == NULL) {
+            q2->end = temp2;
+            break;
+        }
+
+        temp2->next = (Node*) malloc(sizeof(Node));
+        temp2 = temp2->next;
+    }
+
+    q2->qty = q->qty;
+
+    return q2;
+}
 
 bool queue_toString(Queue *q, char *str);
 
