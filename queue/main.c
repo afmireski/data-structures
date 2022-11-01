@@ -28,7 +28,10 @@ int main() {
     printf("\n\n");
     // test_queue_insert();
     printf("\n\n");
-    test_queue_remove();
+    // test_queue_remove();
+    printf("\n\n");    
+    test_queue_clone();
+    
     
     printf("/****************** END ********************/\n");
     return 0;
@@ -104,4 +107,41 @@ void test_queue_remove() {
     verify(queue_size(q) == 2, "Queue new size should be equals 2");
 
     queue_destroy(&q);
+}
+
+void test_queue_clone() {
+    printf("/***********************************************\n");
+    printf("TEST: CLONE\n");
+    printf("/***********************************************\n\n");
+    
+    Queue* q = NULL;
+
+    
+    verify(queue_clone(q) == NULL, "Should return NULL because the Queue is NULL");
+
+    q = queue_create();
+
+    verify(queue_clone(q) == NULL, "Should return NULL because the Queue is empty");
+
+    for (int i = 1; i <= 3; i++) {
+        queue_insert(q, i);
+    }
+
+    Queue* q2 = queue_clone(q);
+
+    verify(q2 != NULL, "Should return a Queue pointer because the Queue was cloned");
+
+    queue_print(q);
+    queue_print(q2);
+
+    any first1;
+    any first2;
+
+    queue_getFirst(q, &first1);
+    queue_getFirst(q2, &first2);
+
+    verify(first1 == first2, "Both queues should be same begin");
+
+    queue_destroy(&q);
+    queue_destroy(&q2);
 }

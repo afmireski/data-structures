@@ -186,12 +186,12 @@ Queue *queue_clone(Queue *q)
     if (q == NULL)
     {
         printf("Error, the queue cannot be null!!!\n");
-        return false;
+        return NULL;
     }
     else if (q->qty == 0)
     {
         printf("Error, the queue is empty!!!\n");
-        return false;
+        return NULL;
     }
 
     Queue *q2 = (Queue *)malloc(sizeof(Queue));
