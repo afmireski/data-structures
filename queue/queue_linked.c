@@ -247,7 +247,8 @@ bool queue_toString(Queue *q, char *str)
         sprintf(buffer, "%d", temp->data);
         strcat(str, buffer);
 
-        if (temp->next != NULL) {
+        if (temp->next != NULL)
+        {
             strcat(str, ", ");
         }
 
@@ -257,41 +258,51 @@ bool queue_toString(Queue *q, char *str)
     return true;
 }
 
-bool queue_insertMany(Queue *q, any *vector, int len) {
+bool queue_insertMany(Queue *q, any *vector, int len)
+{
     if (q == NULL)
     {
         printf("Error, the queue cannot be null!!!\n");
         return false;
     }
-    else if (q->qty == 0)
+    else if (vector == NULL)
     {
-        printf("Error, the queue is empty!!!\n");
+        printf("Error, the vector cannot be null!!!\n");
         return false;
-    } else if (vector == NULL) {
-        printf("Error, the vecyot cannot be null!!!\n");
-        return false;
-    } else if (len <= 0) {
+    }
+    else if (len <= 0)
+    {
         printf("Error, the vector is empty!!!\n");
         return false;
     }
 
-    Node* first = (Node*) malloc(sizeof(Node));
-    Node* temp = first;
+    Node *first = (Node *)malloc(sizeof(Node));
+    Node *temp = first;
 
-    for (int i = 0; i < len; i++) {
+    for (int i = 0; i < len; i++)
+    {
         temp->data = vector[i];
-        q->qty++;
 
-        if (i < len-1) {
-            temp->next = (Node*) malloc(sizeof(Node));
+        if (i < len - 1)
+        {
+            temp->next = (Node *)malloc(sizeof(Node));
             temp = temp->next;
         }
     }
 
     temp->next = NULL;
 
-    q->end->next = first;
+    if (q->qty == 0)
+    {
+        q->begin = first;
+    }
+    else
+    {
+        q->end->next = first;
+    }
+
     q->end = temp;
+    q->qty += len;
 
     return true;
 }
