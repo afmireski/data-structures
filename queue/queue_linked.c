@@ -136,9 +136,34 @@ bool queue_isEmpty(Queue *q) {
     return q->qty == 0;
 }
 
-int queue_size(Queue *q);
+int queue_size(Queue *q) {
+    if (q == NULL)
+    {
+        printf("Error, the queue cannot be null!!!\n");
+        return -1;
+    }
 
-void queue_print(Queue *q);
+    return q->qty;
+}
+
+void queue_print(Queue *q) {
+    if (q == NULL)
+    {
+        printf("Error, the queue cannot be null!!!\n");
+    } else if (q->qty == 0) {
+        printf("Error, the queue is empty!!!\n");
+    } else {
+        Node* temp = q->begin;
+
+
+        printf("<-< ");
+        while(temp != NULL) {
+            printf(" %d", temp->data);
+            temp = temp->next;
+        }
+        printf("|\n");
+    }
+}
 
 Queue *queue_clone(Queue *q);
 
