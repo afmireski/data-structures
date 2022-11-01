@@ -56,9 +56,55 @@ void queue_destroy(Queue **address)
     *address = NULL;
 }
 
-bool queue_insert(Queue *q, any element);
+Node *newNode(any value, Node *next)
+{
+    Node *node = (Node *)malloc(sizeof(Node));
+    node->data = value;
+    node->next = next;
 
-bool queue_remove(Queue *q, any *output);
+    return node;
+}
+
+bool queue_insert(Queue *q, any element)
+{
+    if (q == NULL)
+    {
+        printf("Error, the queue cannot be null!!!\n");
+        return false;
+    }
+
+    Node *new_node = newNode(element, NULL);
+
+    if (q->qty == 0) {
+        q->begin = new_node;
+    } else {
+        q->end->next = new_node;
+    }
+
+    q->end = new_node;
+    q->qty++;
+
+    return true;
+}
+
+bool queue_remove(Queue *q, any *output) {
+    if (q == NULL)
+    {
+        printf("Error, the queue cannot be null!!!\n");
+        return false;
+    }
+
+    Node* begin = q->begin;
+
+    output = begin->data;
+
+    q->begin = begin->next;
+
+    begin->next = NULL;
+    free(begin);
+
+    return true;
+}
 
 bool queue_getFirst(Queue *q, any *output);
 
