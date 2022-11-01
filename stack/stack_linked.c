@@ -191,12 +191,12 @@ Stack *stack_clone(Stack *st)
     if (st == NULL)
     {
         printf("Error, the stack cannot be null!!!\n");
-        return false;
+        return NULL;
     }
     else if (st->qty == 0)
     {
         printf("Error, the stack is empty!!!\n");
-        return false;
+        return NULL;
     }
 
     Stack *st2 = (Stack *)calloc(1, sizeof(Stack));
