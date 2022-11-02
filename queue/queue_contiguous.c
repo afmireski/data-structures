@@ -30,7 +30,7 @@ Queue *queue_create()
 {
     Queue *q = (Queue *)malloc(sizeof(Queue));
 
-    q->data = (any*) calloc(DEFAULT_LEN, sizeof(any));
+    q->data = (any *)calloc(DEFAULT_LEN, sizeof(any));
     q->len = DEFAULT_LEN;
     q->qty = 0;
     q->begin = 0;
@@ -47,29 +47,51 @@ void queue_destroy(Queue **address)
     *address = NULL;
 }
 
+any *expand_vector(int *len, any *v)
+{
+    int n = *len > 1000 ? *len + 100 : *len * 2;
+    any *new_array = (any *)calloc(n, sizeof(any));
+
+    int i;
+    for (i = 0; i < *len; i++)
+    {
+        any ele = *(v + i);
+        *(new_array + i) = ele;
+    }
+
+    *len = n;
+
+    return new_array;
+}
+
 bool queue_insert(Queue *q, any element)
 {
-    // if (q == NULL)
-    // {
-    //     printf("Error, the queue cannot be null!!!\n");
-    //     return false;
-    // }
+    if (q == NULL)
+    {
+        printf("Error, the queue cannot be null!!!\n");
+        return false;
+    }
 
-    // Node *new_node = newNode(element, NULL);
+    if (q->qty >= q->len)
+    {
+        any *new_data = expand_vector(&q->len, q->data);
 
-    // if (q->qty == 0)
-    // {
-    //     q->begin = new_node;
-    // }
-    // else
-    // {
-    //     q->end->next = new_node;
-    // }
+        if (new_data == NULL)
+        {
+            printf("Error, the queue expansion failed!!!\n");
+            return false;
+        }
 
-    // q->end = new_node;
-    // q->qty++;
+        free(q->data);
+        q->data = new_data;
+    }
 
-    // return true;
+    q->data[q->end] = element;
+
+    q->end++;
+    q->qty++;
+
+    return true;
 }
 
 bool queue_remove(Queue *q, any *output)
