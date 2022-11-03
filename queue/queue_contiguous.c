@@ -146,13 +146,13 @@ bool queue_isEmpty(Queue *q)
 
 int queue_size(Queue *q)
 {
-    // if (q == NULL)
-    // {
-    //     printf("Error, the queue cannot be null!!!\n");
-    //     return -1;
-    // }
+    if (q == NULL)
+    {
+        printf("Error, the queue cannot be null!!!\n");
+        return -1;
+    }
 
-    // return q->qty;
+    return q->qty;
 }
 
 void queue_print(Queue *q)
