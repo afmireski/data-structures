@@ -233,49 +233,45 @@ bool queue_toString(Queue *q, char *str)
 
 bool queue_insertMany(Queue *q, any *vector, int len)
 {
-    // if (q == NULL)
-    // {
-    //     printf("Error, the queue cannot be null!!!\n");
-    //     return false;
-    // }
-    // else if (vector == NULL)
-    // {
-    //     printf("Error, the vector cannot be null!!!\n");
-    //     return false;
-    // }
-    // else if (len <= 0)
-    // {
-    //     printf("Error, the vector is empty!!!\n");
-    //     return false;
-    // }
+    if (q == NULL)
+    {
+        printf("Error, the queue cannot be null!!!\n");
+        return false;
+    }
+    else if (vector == NULL)
+    {
+        printf("Error, the vector cannot be null!!!\n");
+        return false;
+    }
+    else if (len <= 0)
+    {
+        printf("Error, the vector is empty!!!\n");
+        return false;
+    }
 
-    // Node *first = (Node *)malloc(sizeof(Node));
-    // Node *temp = first;
+    int total_qty = q->qty + len;
 
-    // for (int i = 0; i < len; i++)
-    // {
-    //     temp->data = vector[i];
+    if (total_qty >= q->len) {
+        int new_len = q->len + len;
+        any *new_data = expand_vector(&new_len, q->data);
 
-    //     if (i < len - 1)
-    //     {
-    //         temp->next = (Node *)malloc(sizeof(Node));
-    //         temp = temp->next;
-    //     }
-    // }
+        if (new_data == NULL)
+        {
+            printf("Error, the queue expansion failed!!!\n");
+            return false;
+        }
 
-    // temp->next = NULL;
+        free(q->data);
+        q->data = new_data;
+        q->len = new_len;
+    }
 
-    // if (q->qty == 0)
-    // {
-    //     q->begin = first;
-    // }
-    // else
-    // {
-    //     q->end->next = first;
-    // }
+    int j = q->end;
+    for (int i = 0; i < len; i++,j++) {
+        q->data[j] = vector[i];
+    }
+    q->end = j+1;
+    q->qty = total_qty;
 
-    // q->end = temp;
-    // q->qty += len;
-
-    // return true;
+    return true;
 }
