@@ -175,7 +175,7 @@ void test_queue_toString()
     }
 
     verify(queue_toString(q, str) == true, "Should return true because the Queue was converted to string");
-
+    
     verify(strcmp(str, "| 1, 2, 3") == 0, "The generated string should be equals \"| 1, 2, 3\"");
 
     queue_destroy(&q);
@@ -197,7 +197,7 @@ void test_queue_insertUpMany()
     int len = 3;
 
     any v1[3] = {1, 2, 3};
-    any v2[3] = {4, 5, 6};
+    any v2[8] = {4, 5, 6, 7, 8, 9, 10, 11};
 
     verify(queue_insertMany(q, v1, -1) == false, "Should return false because len is not greater than 0");
 
