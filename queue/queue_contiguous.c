@@ -117,20 +117,20 @@ bool queue_remove(Queue *q, any *output)
 
 bool queue_getFirst(Queue *q, any *output)
 {
-    // if (q == NULL)
-    // {
-    //     printf("Error, the queue cannot be null!!!\n");
-    //     return false;
-    // }
-    // else if (q->qty == 0)
-    // {
-    //     printf("Error, the queue is empty!!!\n");
-    //     return false;
-    // }
+    if (q == NULL)
+    {
+        printf("Error, the queue cannot be null!!!\n");
+        return false;
+    }
+    else if (q->qty == 0)
+    {
+        printf("Error, the queue is empty!!!\n");
+        return false;
+    }
 
-    // *output = q->begin->data;
+    *output = q->data[q->begin];
 
-    // return true;
+    return true;
 }
 
 bool queue_isEmpty(Queue *q)
