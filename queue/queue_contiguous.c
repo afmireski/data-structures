@@ -157,26 +157,23 @@ int queue_size(Queue *q)
 
 void queue_print(Queue *q)
 {
-    // if (q == NULL)
-    // {
-    //     printf("Error, the queue cannot be null!!!\n");
-    // }
-    // else if (q->qty == 0)
-    // {
-    //     printf("Error, the queue is empty!!!\n");
-    // }
-    // else
-    // {
-    //     Node *temp = q->begin;
-
-    //     printf("<-< ");
-    //     while (temp != NULL)
-    //     {
-    //         printf(" %d", temp->data);
-    //         temp = temp->next;
-    //     }
-    //     printf("|\n");
-    // }
+    if (q == NULL)
+    {
+        printf("Error, the queue cannot be null!!!\n");
+    }
+    else if (q->qty == 0)
+    {
+        printf("Error, the queue is empty!!!\n");
+    }
+    else
+    {
+        printf("<-< ");
+        for (int i = q->begin; i < q->end; i++)
+        {
+            printf(" %d", q->data[i]);
+        }
+        printf("|\n");
+    }
 }
 
 Queue *queue_clone(Queue *q)
