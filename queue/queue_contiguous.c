@@ -226,6 +226,11 @@ bool queue_toString(Queue *q, char *str)
     {
         sprintf(buffer, "%d", q->data[i]);
         strcat(str, buffer);
+
+        if (i < q->end-1)
+        {
+            strcat(str, ", ");
+        }
     }
 
     return true;
