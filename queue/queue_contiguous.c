@@ -96,29 +96,23 @@ bool queue_insert(Queue *q, any element)
 
 bool queue_remove(Queue *q, any *output)
 {
-    // if (q == NULL)
-    // {
-    //     printf("Error, the queue cannot be null!!!\n");
-    //     return false;
-    // }
-    // else if (q->qty == 0)
-    // {
-    //     printf("Error, the queue is empty!!!\n");
-    //     return false;
-    // }
+    if (q == NULL)
+    {
+        printf("Error, the queue cannot be null!!!\n");
+        return false;
+    }
+    else if (q->qty == 0)
+    {
+        printf("Error, the queue is empty!!!\n");
+        return false;
+    }
 
-    // Node *begin = q->begin;
+    *output = q->data[q->begin];
+    q->begin++;
 
-    // *output = begin->data;
+    q->qty--;
 
-    // q->begin = begin->next;
-
-    // begin->next = NULL;
-    // free(begin);
-
-    // q->qty--;
-
-    // return true;
+    return true;
 }
 
 bool queue_getFirst(Queue *q, any *output)
