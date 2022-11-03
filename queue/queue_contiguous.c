@@ -178,43 +178,30 @@ void queue_print(Queue *q)
 
 Queue *queue_clone(Queue *q)
 {
-    // if (q == NULL)
-    // {
-    //     printf("Error, the queue cannot be null!!!\n");
-    //     return NULL;
-    // }
-    // else if (q->qty == 0)
-    // {
-    //     printf("Error, the queue is empty!!!\n");
-    //     return NULL;
-    // }
+    if (q == NULL)
+    {
+        printf("Error, the queue cannot be null!!!\n");
+        return NULL;
+    }
+    else if (q->qty == 0)
+    {
+        printf("Error, the queue is empty!!!\n");
+        return NULL;
+    }
 
-    // Queue *q2 = (Queue *)malloc(sizeof(Queue));
+    Queue *q2 = (Queue *)malloc(sizeof(Queue));
 
-    // Node *temp1 = q->begin;
+    q2->qty = q->qty;
+    q2->len = q->len;
+    q2->begin = q->begin;
+    q2->end = q->end;
+    q2->data = (any*) calloc(q->len, sizeof(any));
 
-    // q2->begin = (Node *)malloc(sizeof(Node));
-    // Node *temp2 = q2->begin;
+    for (int i = q->begin; i < q->end; i++) {
+        q2->data[i] = q->data[i];
+    }
 
-    // while (true)
-    // {
-    //     temp2->data = temp1->data;
-    //     temp2->next = NULL;
-
-    //     temp1 = temp1->next;
-    //     if (temp1 == NULL)
-    //     {
-    //         q2->end = temp2;
-    //         break;
-    //     }
-
-    //     temp2->next = (Node *)malloc(sizeof(Node));
-    //     temp2 = temp2->next;
-    // }
-
-    // q2->qty = q->qty;
-
-    // return q2;
+    return q2;
 }
 
 bool queue_toString(Queue *q, char *str)
