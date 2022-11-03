@@ -206,38 +206,29 @@ Queue *queue_clone(Queue *q)
 
 bool queue_toString(Queue *q, char *str)
 {
-    // if (q == NULL)
-    // {
-    //     printf("Error, the queue cannot be null!!!\n");
-    //     return false;
-    // }
-    // else if (q->qty == 0)
-    // {
-    //     printf("Error, the queue is empty!!!\n");
-    //     return false;
-    // }
+    if (q == NULL)
+    {
+        printf("Error, the queue cannot be null!!!\n");
+        return false;
+    }
+    else if (q->qty == 0)
+    {
+        printf("Error, the queue is empty!!!\n");
+        return false;
+    }
 
-    // char buffer[50];
+    char buffer[50];
 
-    // *str = '\0';
-    // strcat(str, "| ");
+    *str = '\0';
+    strcat(str, "| ");
 
-    // Node *temp = q->begin;
+    for (int i = 0; i < q->end; i++)
+    {
+        sprintf(buffer, "%d", q->data[i]);
+        strcat(str, buffer);
+    }
 
-    // while (temp != NULL)
-    // {
-    //     sprintf(buffer, "%d", temp->data);
-    //     strcat(str, buffer);
-
-    //     if (temp->next != NULL)
-    //     {
-    //         strcat(str, ", ");
-    //     }
-
-    //     temp = temp->next;
-    // }
-
-    // return true;
+    return true;
 }
 
 bool queue_insertMany(Queue *q, any *vector, int len)
