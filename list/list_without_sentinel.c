@@ -39,7 +39,19 @@ List *list_create() {
     return l;
 }
 
-void list_destroy(List **address);
+void list_destroy(List **address) {
+    Node* temp = (*address)->begin;
+    Node* aux;
+
+    while (temp != NULL) {
+        aux = temp;
+        temp = temp->next;
+        free(aux);
+    }
+
+    free(*address);
+    *address = NULL;
+}
 
 void list_print(List *l);
 
