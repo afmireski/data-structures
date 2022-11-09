@@ -10,7 +10,6 @@
 
 #include "list.h"
 
-
 void verify(int condition, char *message);
 
 void test_list_create_and_destroy();
@@ -31,9 +30,9 @@ int main()
     printf("/***********************************************\n\n");
     // test_list_create_and_destroy();
     printf("\n\n");
-    test_list_append();
+    // test_list_append();
     printf("\n\n");
-    // test_list_isEmpty();
+    test_list_isEmpty();
     printf("\n\n");
     // test_list_insert();
     printf("\n\n");
@@ -65,14 +64,13 @@ void verify(int condition, char *message)
     }
 }
 
-
-
-void test_list_create_and_destroy() {
+void test_list_create_and_destroy()
+{
     printf("/***********************************************\n");
     printf("TEST: CREATE AND DESTROY\n");
     printf("/***********************************************\n\n");
 
-    List* l = list_create();
+    List *l = list_create();
 
     verify(l != NULL, "Should create a new List");
 
@@ -81,25 +79,45 @@ void test_list_create_and_destroy() {
     verify(l == NULL, "Should destroy the List");
 }
 
-void test_list_append() {
-    List* l = NULL;
+void test_list_append()
+{
+    List *l = NULL;
 
     int element = 1;
 
-    verify(list_append(l, element) == false, "Should return 'false' because the list is NULL" );
+    verify(list_append(l, element) == false, "Should return 'false' because the list is NULL");
 
     l = list_create();
 
-    verify(list_append(l, element) == true, "Should return 'true' and add the first element (1)" );
+    verify(list_append(l, element) == true, "Should return 'true' and add the first element (1)");
     // list_print(l);
 
     element = 2;
 
-    verify(list_append(l, element) == true, "Should return 'true' and add a new element (2)" );
+    verify(list_append(l, element) == true, "Should return 'true' and add a new element (2)");
     // list_print(l);
 
     verify(list_size(l) == 2, "The list should contain two elements");
 
     list_destroy(&l);
+}
 
+void test_list_isEmpty()
+{
+    printf("/***********************************************\n");
+    printf("TEST: IS EMPTY\n");
+    printf("/***********************************************\n\n");
+    List *l = NULL;
+
+    verify(list_isEmpty(l) == false, "Should return 'false' because the list is NULL");
+
+    l = list_create();
+
+    verify(list_isEmpty(l) == true, "Should return 'true' because the list is Empty");
+
+    list_append(l, 1);
+
+    verify(list_isEmpty(l) == false, "Should return 'false' because the list is not Empty");
+
+    list_destroy(&l);
 }
