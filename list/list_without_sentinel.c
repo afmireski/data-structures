@@ -139,29 +139,39 @@ bool list_insert(List *l, any element, int index)
     {
         printf("Error, the list cannot be null!!!\n");
         return false;
-    } else if (index > l->qty) {
+    }
+    else if (index > l->qty)
+    {
         printf("Error, the index should be into the interval [0, %d]!!!\n", l->qty);
         return false;
     }
 
     Node *new = newNode(element, NULL, NULL);
 
-    if (l->qty == 0) {
+    if (l->qty == 0)
+    {
         l->begin = new;
         l->end = new;
-    } else if (index == 0) {
+    }
+    else if (index == 0)
+    {
         new->next = l->begin;
         l->begin->back = new;
-        l->begin = new;       
-    } else if (index = l->qty) {
+        l->begin = new;
+    }
+    else if (index = l->qty)
+    {
         new->back = l->end;
         l->end->next = new;
         l->end = new;
-    } else {
-        Node* temp = l->begin;
+    }
+    else
+    {
+        Node *temp = l->begin;
 
         // Encontra o Node atual da posição index
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < index; i++)
+        {
             temp = temp->next;
         }
 
@@ -175,7 +185,51 @@ bool list_insert(List *l, any element, int index)
     return true;
 }
 
-bool list_removeAt(List *l, int index, any *output);
+bool list_removeAt(List *l, int index, any *output)
+{
+    if (l == NULL)
+    {
+        printf("Error, the list cannot be null!!!\n");
+        return false;
+    }
+    else if (l->qty == 0)
+    {
+        printf("Error, the list is empty!!!\n");
+        return false;
+    }
+    else if (index >= l->qty)
+    {
+        printf("Error, the index should be into the interval [0, %d]!!!\n", l->qty-1);
+        return false;
+    }
+
+    Node *temp = l->begin;
+
+    // Encontra o Node atual da posição index
+    for (int i = 0; i < index; i++)
+    {
+        temp = temp->next;
+    }
+
+    if (index = 0) {
+        l->begin = temp->next;
+        temp->next->back = NULL;
+        temp->next = NULL;
+    } else if (index = l->qty-1) {
+        l->end = temp->back;
+        temp->back->next = NULL;
+        temp->back = NULL;
+    } else {
+        temp->back->next = temp->next;
+        temp->next->back = temp->back;
+        temp->back = NULL;
+        temp->next = NULL;
+    }
+
+    free(temp);
+    l->qty--;
+    return true;
+}
 
 int list_remove(List *l, any element);
 
