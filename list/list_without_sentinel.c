@@ -143,7 +143,7 @@ bool list_insert(List *l, any element, int index)
         printf("Error, the list cannot be null!!!\n");
         return false;
     }
-    else if (index > l->qty)
+    else if (index < 0 || index > l->qty)
     {
         printf("Error, the index should be into the interval [0, %d]!!!\n", l->qty);
         return false;
@@ -162,7 +162,7 @@ bool list_insert(List *l, any element, int index)
         l->begin->back = new;
         l->begin = new;
     }
-    else if (index = l->qty)
+    else if (index == l->qty)
     {
         new->back = l->end;
         l->end->next = new;
