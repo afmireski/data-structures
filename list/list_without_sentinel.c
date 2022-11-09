@@ -296,7 +296,8 @@ int list_remove(List *l, any element)
     return i;
 }
 
-bool list_replace(List *l, int index, any newElement) {
+bool list_replace(List *l, int index, any newElement)
+{
     if (l == NULL)
     {
         printf("Error, the list cannot be null!!!\n");
@@ -313,8 +314,9 @@ bool list_replace(List *l, int index, any newElement) {
         return false;
     }
 
-    Node* temp = l->begin;
-    for (int i = 0; i <= index; i++) {
+    Node *temp = l->begin;
+    for (int i = 0; i <= index; i++)
+    {
         temp = temp->next;
     }
 
@@ -322,7 +324,8 @@ bool list_replace(List *l, int index, any newElement) {
     return true;
 }
 
-int list_indexOf(List *l, any element) {
+int list_indexOf(List *l, any element)
+{
     if (l == NULL)
     {
         printf("Error, the list cannot be null!!!\n");
@@ -334,16 +337,45 @@ int list_indexOf(List *l, any element) {
         return false;
     }
 
-    Node* temp = l->begin;
-    for (int i = 0; i < l->qty; i++) {
-        if (temp->data == element) return i;
-        
+    Node *temp = l->begin;
+    for (int i = 0; i < l->qty; i++)
+    {
+        if (temp->data == element)
+            return i;
+
         temp = temp->next;
     }
 
     return -1;
 }
 
-bool list_returnAt(List *l, int index, any *output);
+bool list_returnAt(List *l, int index, any *output)
+{
+    if (l == NULL)
+    {
+        printf("Error, the list cannot be null!!!\n");
+        return false;
+    }
+    else if (l->qty == 0)
+    {
+        printf("Error, the list is empty!!!\n");
+        return false;
+    }
+    else if (index >= l->qty)
+    {
+        printf("Error, the index should be into the interval [0, %d]!!!\n", l->qty - 1);
+        return false;
+    }
+
+    Node *temp = l->begin;
+    for (int i = 0; i <= index; i++)
+    {
+        temp = temp->next;
+    }
+
+    *output = temp->data;
+    
+    return true;
+}
 
 bool list_toString(List *l, char *str);
