@@ -34,7 +34,7 @@ int main()
     printf("\n\n");
     // test_list_isEmpty();
     printf("\n\n");
-    test_list_insert();
+    // test_list_insert();
     printf("\n\n");
     // test_list_removeAt();
     printf("\n\n");
@@ -162,6 +162,51 @@ void test_list_insert() {
 
     verify(list_size(l) == 5, "The list should contain five elements");
     // list_print(l);
+
+    list_destroy(&l);
+}
+
+void test_list_removeAt() {
+    printf("/***********************************************\n");
+    printf("TEST: REMOVE AT\n");
+    printf("/***********************************************\n\n");
+    
+    List* l = NULL;
+    any output;
+
+    verify(list_removeAt(l, -1, &output) == false, "Should return 'false' because the list is NULL");
+
+    l = list_create();
+
+    verify(list_removeAt(l, -1, &output) == false, "Should return 'false' because the list is empty");
+
+    for (int i = 1; i <= 5; i++) {
+        list_append(l, i);
+    }
+
+    verify(list_removeAt(l, -1, &output) == false, "Should return 'false' because index is less than 0");
+
+    verify(list_removeAt(l, 5, &output) == false, "Should return 'false' because index is greather than 4");
+
+    list_print(l);
+    verify(list_removeAt(l, 0, &output) == true, "Should return 'true' because the first element was removed");
+    verify(output == 1, "The removed element should be equals 1");
+    verify(list_size(l) == 4, "The list should contains 4 elements before remotion");
+
+    list_print(l);
+    verify(list_removeAt(l, 3, &output) == true, "Should return 'true' because the last element was removed");
+    verify(output == 5, "The removed element should be equals 5");
+    verify(list_size(l) == 3, "The list should contains 3 elements before remotion");
+    
+    list_print(l);
+    verify(list_removeAt(l, 1, &output) == true, "Should return 'true' because the middle element was removed");
+    verify(output == 3, "The removed element should be equals 3");
+    verify(list_size(l) == 2, "The list should contains 2 elements before remotion");
+
+    list_removeAt(l, 0, &output);
+    list_removeAt(l, 0, &output);
+    
+    verify(list_isEmpty(l), "The list should be empty");
 
     list_destroy(&l);
 }

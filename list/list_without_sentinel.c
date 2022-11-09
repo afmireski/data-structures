@@ -200,7 +200,7 @@ bool list_removeAt(List *l, int index, any *output)
         printf("Error, the list is empty!!!\n");
         return false;
     }
-    else if (index >= l->qty)
+    else if (index < 0 || index >= l->qty)
     {
         printf("Error, the index should be into the interval [0, %d]!!!\n", l->qty - 1);
         return false;
@@ -217,8 +217,11 @@ bool list_removeAt(List *l, int index, any *output)
     if (index == 0)
     {
         l->begin = temp->next;
-        temp->next->back = NULL;
-        temp->next = NULL;
+        if (temp->next != NULL)
+        {
+            temp->next->back = NULL;
+            temp->next = NULL;
+        }
     }
     else if (index == l->qty - 1)
     {
@@ -306,7 +309,6 @@ int list_remove(List *l, any element)
 
     if (l->qty == 0)
     {
-        l->begin = NULL;
         l->end = NULL;
     }
 
