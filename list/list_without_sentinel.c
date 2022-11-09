@@ -214,13 +214,13 @@ bool list_removeAt(List *l, int index, any *output)
         temp = temp->next;
     }
 
-    if (index = 0)
+    if (index == 0)
     {
         l->begin = temp->next;
         temp->next->back = NULL;
         temp->next = NULL;
     }
-    else if (index = l->qty - 1)
+    else if (index == l->qty - 1)
     {
         l->end = temp->back;
         temp->back->next = NULL;
@@ -281,13 +281,13 @@ int list_remove(List *l, any element)
         return -1;
     }
 
-    if (i = 0)
+    if (i == 0)
     {
         l->begin = temp->next;
         temp->next->back = NULL;
         temp->next = NULL;
     }
-    else if (i = l->qty - 1)
+    else if (i == l->qty - 1)
     {
         l->end = temp->back;
         temp->back->next = NULL;
