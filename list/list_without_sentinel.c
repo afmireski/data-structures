@@ -234,6 +234,12 @@ bool list_removeAt(List *l, int index, any *output)
     *output = temp->data;
     free(temp);
     l->qty--;
+
+    if (l->qty == 0) {
+        l->begin = NULL;
+        l->end = NULL;
+    }
+
     return true;
 }
 
@@ -293,6 +299,12 @@ int list_remove(List *l, any element)
 
     free(temp);
     l->qty--;
+
+    if (l->qty == 0) {
+        l->begin = NULL;
+        l->end = NULL;
+    }
+
     return i;
 }
 
