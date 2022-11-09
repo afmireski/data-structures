@@ -29,8 +29,9 @@ struct list
 /***********************************************
 | ACTIONS
 ************************************************/
-List *list_create() {
-    List* l = (List*) malloc(sizeof(List));
+List *list_create()
+{
+    List *l = (List *)malloc(sizeof(List));
 
     l->begin = NULL;
     l->end = NULL;
@@ -39,11 +40,13 @@ List *list_create() {
     return l;
 }
 
-void list_destroy(List **address) {
-    Node* temp = (*address)->begin;
-    Node* aux;
+void list_destroy(List **address)
+{
+    Node *temp = (*address)->begin;
+    Node *aux;
 
-    while (temp != NULL) {
+    while (temp != NULL)
+    {
         aux = temp;
         temp = temp->next;
         free(aux);
@@ -53,7 +56,38 @@ void list_destroy(List **address) {
     *address = NULL;
 }
 
-void list_print(List *l);
+Node *newNode(any value, Node *next, Node *back)
+{
+    Node *node = (Node *)malloc(sizeof(Node));
+    node->data = value;
+    node->back = back;
+    node->next = next;
+
+    return node;
+}
+
+void list_print(List *l) {
+    if (l == NULL)
+    {
+        printf("Error, the list cannot be null!!!\n");
+    }
+    else if (l->qty == 0)
+    {
+        printf("Error, the list is empty!!!\n");
+    }
+    else
+    {
+        Node *temp = l->begin;
+
+        printf("[ ");
+        while (temp != NULL)
+        {
+            printf("%d, ", temp->data);
+            temp = temp->next;
+        }
+        printf("\b\b]\n");
+    }
+}
 
 int list_size(List *l);
 
