@@ -322,7 +322,27 @@ bool list_replace(List *l, int index, any newElement) {
     return true;
 }
 
-int list_indexOf(List *l, any element);
+int list_indexOf(List *l, any element) {
+    if (l == NULL)
+    {
+        printf("Error, the list cannot be null!!!\n");
+        return false;
+    }
+    else if (l->qty == 0)
+    {
+        printf("Error, the list is empty!!!\n");
+        return false;
+    }
+
+    Node* temp = l->begin;
+    for (int i = 0; i < l->qty; i++) {
+        if (temp->data == element) return i;
+        
+        temp = temp->next;
+    }
+
+    return -1;
+}
 
 bool list_returnAt(List *l, int index, any *output);
 
