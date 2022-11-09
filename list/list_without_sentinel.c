@@ -66,7 +66,8 @@ Node *newNode(any value, Node *next, Node *back)
     return node;
 }
 
-void list_print(List *l) {
+void list_print(List *l)
+{
     if (l == NULL)
     {
         printf("Error, the list cannot be null!!!\n");
@@ -79,7 +80,7 @@ void list_print(List *l) {
     {
         Node *temp = l->begin;
 
-        printf("[ ");
+        printf("[");
         while (temp != NULL)
         {
             printf("%d, ", temp->data);
@@ -89,9 +90,25 @@ void list_print(List *l) {
     }
 }
 
-int list_size(List *l);
+int list_size(List *l)
+{
+    if (l == NULL)
+    {
+        printf("Error, the list cannot be null!!!\n");
+        return -1;
+    }
+    return l->qty;
+}
 
-bool list_isEmpty(List *l);
+bool list_isEmpty(List *l) {
+    if (l == NULL)
+    {
+        printf("Error, the list cannot be null!!!\n");
+        return false;
+    }
+
+    return l->qty == 0;
+}
 
 bool list_append(List *l, any element);
 
