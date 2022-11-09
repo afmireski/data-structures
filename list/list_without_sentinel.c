@@ -125,8 +125,11 @@ bool list_append(List *l, any element)
     {
         l->begin = new;
     }
+    else
+    {
+        l->end->next = new;
+    }
 
-    l->end->next = new;
     l->end = new;
     l->qty++;
 
@@ -235,7 +238,8 @@ bool list_removeAt(List *l, int index, any *output)
     free(temp);
     l->qty--;
 
-    if (l->qty == 0) {
+    if (l->qty == 0)
+    {
         l->begin = NULL;
         l->end = NULL;
     }
@@ -300,7 +304,8 @@ int list_remove(List *l, any element)
     free(temp);
     l->qty--;
 
-    if (l->qty == 0) {
+    if (l->qty == 0)
+    {
         l->begin = NULL;
         l->end = NULL;
     }

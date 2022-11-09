@@ -14,8 +14,8 @@
 void verify(int condition, char *message);
 
 void test_list_create_and_destroy();
-void test_list_isEmpty();
 void test_list_append();
+void test_list_isEmpty();
 void test_list_insert();
 void test_list_removeAt();
 void test_list_remove();
@@ -31,9 +31,9 @@ int main()
     printf("/***********************************************\n\n");
     // test_list_create_and_destroy();
     printf("\n\n");
-    test_list_isEmpty();
+    test_list_append();
     printf("\n\n");
-    // test_list_append();
+    // test_list_isEmpty();
     printf("\n\n");
     // test_list_insert();
     printf("\n\n");
@@ -79,4 +79,27 @@ void test_list_create_and_destroy() {
     list_destroy(&l);
 
     verify(l == NULL, "Should destroy the List");
+}
+
+void test_list_append() {
+    List* l = NULL;
+
+    int element = 1;
+
+    verify(list_append(l, element) == false, "Should return 'false' because the list is NULL" );
+
+    l = list_create();
+
+    verify(list_append(l, element) == true, "Should return 'true' and add the first element (1)" );
+    // list_print(l);
+
+    element = 2;
+
+    verify(list_append(l, element) == true, "Should return 'true' and add a new element (2)" );
+    // list_print(l);
+
+    verify(list_size(l) == 2, "The list should contain two elements");
+
+    list_destroy(&l);
+
 }
