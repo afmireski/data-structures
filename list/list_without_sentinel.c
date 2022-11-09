@@ -56,7 +56,7 @@ void list_destroy(List **address)
     *address = NULL;
 }
 
-Node *newNode(any value, Node *next, Node *back)
+Node *newNode(any value, Node *back, Node *next)
 {
     Node *node = (Node *)malloc(sizeof(Node));
     node->data = value;
@@ -110,7 +110,25 @@ bool list_isEmpty(List *l) {
     return l->qty == 0;
 }
 
-bool list_append(List *l, any element);
+bool list_append(List *l, any element) {
+    if (l == NULL)
+    {
+        printf("Error, the list cannot be null!!!\n");
+        return false;
+    }
+
+    Node* new = newNode(element, l->end, NULL);
+
+    if (l->qty == 0) {
+        l->begin = new;
+    }
+
+    l->end->next = new;
+    l->end = new;
+    l->qty++;
+
+    return true;
+}
 
 bool list_insert(List *l, any element, int index);
 
