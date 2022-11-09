@@ -287,8 +287,11 @@ int list_remove(List *l, any element)
     if (i == 0)
     {
         l->begin = temp->next;
-        temp->next->back = NULL;
-        temp->next = NULL;
+        if (temp->next != NULL)
+        {
+            temp->next->back = NULL;
+            temp->next = NULL;
+        }
     }
     else if (i == l->qty - 1)
     {
