@@ -23,7 +23,7 @@ void test_list_returnAt();
 void test_list_replace();
 void test_list_toString();
 
-void fillList(List* l, any end);
+void fillList(List *l, any end);
 
 int main()
 {
@@ -42,9 +42,9 @@ int main()
     printf("\n\n");
     // test_list_remove();
     printf("\n\n");
-    test_list_indexOf();
+    // test_list_indexOf();
     printf("\n\n");
-    // test_list_returnAt();
+    test_list_returnAt();
     printf("\n\n");
     // test_list_replace();
     printf("\n\n");
@@ -66,8 +66,10 @@ void verify(int condition, char *message)
     }
 }
 
-void fillList(List* l, any end) {
-    for (int i = 1; i <= end; i++) {
+void fillList(List *l, any end)
+{
+    for (int i = 1; i <= end; i++)
+    {
         list_append(l, i);
     }
 }
@@ -130,12 +132,13 @@ void test_list_isEmpty()
     list_destroy(&l);
 }
 
-void test_list_insert() {
+void test_list_insert()
+{
     printf("/***********************************************\n");
     printf("TEST: INSERT\n");
     printf("/***********************************************\n\n");
 
-    List* l = NULL;
+    List *l = NULL;
     any element = 3;
 
     verify(list_insert(l, element, -1) == false, "Should return 'false' because the list is empty");
@@ -174,12 +177,13 @@ void test_list_insert() {
     list_destroy(&l);
 }
 
-void test_list_removeAt() {
+void test_list_removeAt()
+{
     printf("/***********************************************\n");
     printf("TEST: REMOVE AT\n");
     printf("/***********************************************\n\n");
-    
-    List* l = NULL;
+
+    List *l = NULL;
     any output;
 
     verify(list_removeAt(l, -1, &output) == false, "Should return 'false' because the list is NULL");
@@ -188,7 +192,8 @@ void test_list_removeAt() {
 
     verify(list_removeAt(l, -1, &output) == false, "Should return 'false' because the list is empty");
 
-    for (int i = 1; i <= 5; i++) {
+    for (int i = 1; i <= 5; i++)
+    {
         list_append(l, i);
     }
 
@@ -196,35 +201,36 @@ void test_list_removeAt() {
 
     verify(list_removeAt(l, 5, &output) == false, "Should return 'false' because index is greather than 4");
 
-    list_print(l);
+    // list_print(l);
     verify(list_removeAt(l, 0, &output) == true, "Should return 'true' because the first element was removed");
     verify(output == 1, "The removed element should be equals 1");
     verify(list_size(l) == 4, "The list should contains 4 elements after remotion");
 
-    list_print(l);
+    // list_print(l);
     verify(list_removeAt(l, 3, &output) == true, "Should return 'true' because the last element was removed");
     verify(output == 5, "The removed element should be equals 5");
     verify(list_size(l) == 3, "The list should contains 3 elements after remotion");
-    
-    list_print(l);
+
+    // list_print(l);
     verify(list_removeAt(l, 1, &output) == true, "Should return 'true' because the middle element was removed");
     verify(output == 3, "The removed element should be equals 3");
     verify(list_size(l) == 2, "The list should contains 2 elements after remotion");
 
     list_removeAt(l, 0, &output);
     list_removeAt(l, 0, &output);
-    
+
     verify(list_isEmpty(l), "The list should be empty");
 
     list_destroy(&l);
 }
 
-void test_list_remove() {
+void test_list_remove()
+{
     printf("/***********************************************\n");
     printf("TEST: REMOVE \n");
     printf("/***********************************************\n\n");
-    
-    List* l = NULL;
+
+    List *l = NULL;
 
     verify(list_remove(l, 0) == -1, "Should return '-1' because the list is NULL");
 
@@ -232,20 +238,21 @@ void test_list_remove() {
 
     verify(list_remove(l, 0) == -1, "Should return '-1' because the list is empty");
 
-    for (int i = 1; i <= 5; i++) {
+    for (int i = 1; i <= 5; i++)
+    {
         list_append(l, i);
     }
 
     verify(list_remove(l, 0) == -1, "Should return '-1' because 0 is not in the list");
 
     // list_print(l);
-    verify(list_remove(l, 1) == 0, "Should return '0' because the first element was removed");    
+    verify(list_remove(l, 1) == 0, "Should return '0' because the first element was removed");
     verify(list_size(l) == 4, "The list should contains 4 elements after remotion");
 
     // list_print(l);
     verify(list_remove(l, 5) == 3, "Should return '3' because the last element was removed");
     verify(list_size(l) == 3, "The list should contains 3 elements after remotion");
-    
+
     // list_print(l);
     verify(list_remove(l, 3) == 1, "Should return '1' because the middle element was removed");
     verify(list_size(l) == 2, "The list should contains 2 elements after remotion");
@@ -253,18 +260,19 @@ void test_list_remove() {
     // list_print(l);
     list_remove(l, 4);
     list_remove(l, 2);
-    
+
     verify(list_isEmpty(l), "The list should be empty");
 
     list_destroy(&l);
 }
 
-void test_list_indexOf() {
+void test_list_indexOf()
+{
     printf("/***********************************************\n");
     printf("TEST: INDEX OF\n");
     printf("/***********************************************\n\n");
 
-    List* l = NULL;
+    List *l = NULL;
 
     verify(list_indexOf(l, 0) == -1, "Should return '-1' because the list is NULL");
 
@@ -274,7 +282,7 @@ void test_list_indexOf() {
 
     fillList(l, 5);
 
-    list_print(l);
+    // list_print(l);
     verify(list_indexOf(l, -10) == -1, "Should return '-1' because the -10 is not in the list");
 
     verify(list_indexOf(l, 100) == -1, "Should return '-1' because the 100 is not in the list");
@@ -284,6 +292,36 @@ void test_list_indexOf() {
     verify(list_indexOf(l, 2) == 1, "Should return '1' because '1' is in this index");
     verify(list_indexOf(l, 3) == 2, "Should return '2' because '3' is in this index");
     verify(list_indexOf(l, 4) == 3, "Should return '3' because '4' is in this index");
+
+    list_destroy(&l);
+}
+
+void test_list_returnAt()
+{
+    printf("/***********************************************\n");
+    printf("TEST: RETURN AT\n");
+    printf("/***********************************************\n\n");
+
+    List *l = NULL;
+    any output;
+
+    verify(list_returnAt(l, -1, &output) == false, "Should return 'false' because the list is NULL");
+
+    l = list_create();
+
+    verify(list_returnAt(l, -1, &output) == false, "Should return 'false' because the list is empty");
+
+    fillList(l, 5);
+
+    verify(list_returnAt(l, -1, &output) == false, "Should return 'false' because index '-1' is out of range ");
+    verify(list_returnAt(l, 5, &output) == false, "Should return 'false' because index '5' is out of range ");
+
+    // list_print(l);
+    verify(list_returnAt(l, 0, &output) == true && output == 1, "Should return 'true' and find '1' at index 0");
+    verify(list_returnAt(l, 4, &output) == true && output == 5, "Should return 'true' and find '5' at index 4");
+    verify(list_returnAt(l, 2, &output) == true && output == 3, "Should return 'true' and find '3' at index 2");
+    verify(list_returnAt(l, 1, &output) == true && output == 2, "Should return 'true' and find '2' at index 1");
+    verify(list_returnAt(l, 3, &output) == true && output == 4, "Should return 'true' and find '4' at index 3");
 
     list_destroy(&l);
 }
