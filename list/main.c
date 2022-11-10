@@ -46,9 +46,9 @@ int main()
     printf("\n\n");
     // test_list_returnAt();
     printf("\n\n");
-    test_list_replace();
+    // test_list_replace();
     printf("\n\n");
-    // test_list_toString();
+    test_list_toString();
     printf("/****************** END ********************/\n");
 
     return 0;
@@ -369,6 +369,30 @@ void test_list_replace()
     verify(output == -5, "5 was changed to -5");
 
     list_print(l);
+
+    list_destroy(&l);
+}
+
+void test_list_toString() {
+    printf("/***********************************************\n");
+    printf("TEST: TO STRING\n");
+    printf("/***********************************************\n\n");
+
+    List* l = NULL;
+
+    char str[200];
+
+    verify(list_toString(l, str) == false, "Should return 'false' because the list is NULL");
+
+    l = list_create();
+
+    verify(list_toString(l, str) == false, "Should return 'false' because the list is empty");
+
+    fillList(l, 5);
+
+    verify(list_toString(l, str) == true, "Should return 'true' because the list was converted to string");
+
+    verify(strcmp(str, "[1, 2, 3, 4, 5]") == 0, "The generate string should be equals [1, 2, 3, 4, 5]");
 
     list_destroy(&l);
 }
