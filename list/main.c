@@ -30,23 +30,23 @@ int main()
     printf("/***********************************************\n");
     printf("LIST\n");
     printf("/***********************************************\n\n");
-    // test_list_create_and_destroy();
+    test_list_create_and_destroy();
     printf("\n\n");
-    // test_list_append();
+    test_list_append();
     printf("\n\n");
-    // test_list_isEmpty();
+    test_list_isEmpty();
     printf("\n\n");
-    // test_list_insert();
+    test_list_insert();
     printf("\n\n");
-    // test_list_removeAt();
+    test_list_removeAt();
     printf("\n\n");
-    // test_list_remove();
+    test_list_remove();
     printf("\n\n");
-    // test_list_indexOf();
+    test_list_indexOf();
     printf("\n\n");
-    // test_list_returnAt();
+    test_list_returnAt();
     printf("\n\n");
-    // test_list_replace();
+    test_list_replace();
     printf("\n\n");
     test_list_toString();
     printf("/****************** END ********************/\n");
@@ -342,7 +342,7 @@ void test_list_replace()
 
     fillList(l, 5);
 
-    list_print(l);
+    // list_print(l);
     verify(list_replace(l, -1, -1) == false, "Should return 'false' because the '-1' index is out of range'");
     verify(list_replace(l, 5, -1) == false, "Should return 'false' because the '5' index is out of range'");
 
@@ -368,7 +368,7 @@ void test_list_replace()
     list_returnAt(l, 4, &output);
     verify(output == -5, "5 was changed to -5");
 
-    list_print(l);
+    // list_print(l);
 
     list_destroy(&l);
 }
