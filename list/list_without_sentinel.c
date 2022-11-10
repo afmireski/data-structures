@@ -330,14 +330,14 @@ bool list_replace(List *l, int index, any newElement)
         printf("Error, the list is empty!!!\n");
         return false;
     }
-    else if (index >= l->qty)
+    else if (index < 0 || index >= l->qty)
     {
         printf("Error, the index should be into the interval [0, %d]!!!\n", l->qty - 1);
         return false;
     }
 
     Node *temp = l->begin;
-    for (int i = 0; i <= index; i++)
+    for (int i = 0; i < index; i++)
     {
         temp = temp->next;
     }

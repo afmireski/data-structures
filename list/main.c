@@ -44,9 +44,9 @@ int main()
     printf("\n\n");
     // test_list_indexOf();
     printf("\n\n");
-    test_list_returnAt();
+    // test_list_returnAt();
     printf("\n\n");
-    // test_list_replace();
+    test_list_replace();
     printf("\n\n");
     // test_list_toString();
     printf("/****************** END ********************/\n");
@@ -322,6 +322,53 @@ void test_list_returnAt()
     verify(list_returnAt(l, 2, &output) == true && output == 3, "Should return 'true' and find '3' at index 2");
     verify(list_returnAt(l, 1, &output) == true && output == 2, "Should return 'true' and find '2' at index 1");
     verify(list_returnAt(l, 3, &output) == true && output == 4, "Should return 'true' and find '4' at index 3");
+
+    list_destroy(&l);
+}
+
+void test_list_replace()
+{
+    printf("/***********************************************\n");
+    printf("TEST: REPLACE\n");
+    printf("/***********************************************\n\n");
+
+    List *l = NULL;
+
+    verify(list_replace(l, -1, -1) == false, "Should return 'false' because the list is NULL");
+
+    l = list_create();
+
+    verify(list_replace(l, -1, -1) == false, "Should return 'false' because the list is empty");
+
+    fillList(l, 5);
+
+    list_print(l);
+    verify(list_replace(l, -1, -1) == false, "Should return 'false' because the '-1' index is out of range'");
+    verify(list_replace(l, 5, -1) == false, "Should return 'false' because the '5' index is out of range'");
+
+    any output;
+
+    verify(list_replace(l, 0, -1) == true, "Should return 'true' because the element at index 0 as change to -1");
+    list_returnAt(l, 0, &output);
+    verify(output == -1, "1 was changed to -1");
+
+    verify(list_replace(l, 1, -2) == true, "Should return 'true' because the element at index 1 as change to -2");
+    list_returnAt(l, 1, &output); 
+    verify(output == -2, "2 was changed to -2");
+
+    verify(list_replace(l, 2, -3) == true, "Should return 'true' because the element at index 2 as change to -3");
+    list_returnAt(l, 2, &output);
+    verify(output == -3, "3 was changed to -3");
+
+    verify(list_replace(l, 3, -4) == true, "Should return 'true' because the element at index 3 as change to -4");
+    list_returnAt(l, 3, &output);
+    verify(output == -4, "4 was changed to -4");
+
+    verify(list_replace(l, 4, -5) == true, "Should return 'true' because the element at index 4 as change to -5");
+    list_returnAt(l, 4, &output);
+    verify(output == -5, "5 was changed to -5");
+
+    list_print(l);
 
     list_destroy(&l);
 }
