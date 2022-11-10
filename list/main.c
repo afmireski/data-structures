@@ -18,10 +18,12 @@ void test_list_isEmpty();
 void test_list_insert();
 void test_list_removeAt();
 void test_list_remove();
-void test_list_replace();
 void test_list_indexOf();
 void test_list_returnAt();
+void test_list_replace();
 void test_list_toString();
+
+void fillList(List* l, any end);
 
 int main()
 {
@@ -38,13 +40,13 @@ int main()
     printf("\n\n");
     // test_list_removeAt();
     printf("\n\n");
-    test_list_remove();
+    // test_list_remove();
     printf("\n\n");
-    // test_list_replace();
-    printf("\n\n");
-    // test_list_indexOf();
+    test_list_indexOf();
     printf("\n\n");
     // test_list_returnAt();
+    printf("\n\n");
+    // test_list_replace();
     printf("\n\n");
     // test_list_toString();
     printf("/****************** END ********************/\n");
@@ -61,6 +63,12 @@ void verify(int condition, char *message)
     else
     {
         printf("[FAILED] : %s\n", message);
+    }
+}
+
+void fillList(List* l, any end) {
+    for (int i = 1; i <= end; i++) {
+        list_append(l, i);
     }
 }
 
@@ -251,3 +259,31 @@ void test_list_remove() {
     list_destroy(&l);
 }
 
+void test_list_indexOf() {
+    printf("/***********************************************\n");
+    printf("TEST: INDEX OF\n");
+    printf("/***********************************************\n\n");
+
+    List* l = NULL;
+
+    verify(list_indexOf(l, 0) == -1, "Should return '-1' because the list is NULL");
+
+    l = list_create();
+
+    verify(list_indexOf(l, 0) == -1, "Should return '-1' because the list is empty");
+
+    fillList(l, 5);
+
+    list_print(l);
+    verify(list_indexOf(l, -10) == -1, "Should return '-1' because the -10 is not in the list");
+
+    verify(list_indexOf(l, 100) == -1, "Should return '-1' because the 100 is not in the list");
+
+    verify(list_indexOf(l, 1) == 0, "Should return '0' because '1' is in this index");
+    verify(list_indexOf(l, 5) == 4, "Should return '4' because '5' is in this index");
+    verify(list_indexOf(l, 2) == 1, "Should return '1' because '1' is in this index");
+    verify(list_indexOf(l, 3) == 2, "Should return '2' because '3' is in this index");
+    verify(list_indexOf(l, 4) == 3, "Should return '3' because '4' is in this index");
+
+    list_destroy(&l);
+}

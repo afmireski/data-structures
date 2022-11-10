@@ -351,12 +351,12 @@ int list_indexOf(List *l, any element)
     if (l == NULL)
     {
         printf("Error, the list cannot be null!!!\n");
-        return false;
+        return -1;
     }
     else if (l->qty == 0)
     {
         printf("Error, the list is empty!!!\n");
-        return false;
+        return -1;
     }
 
     Node *temp = l->begin;
