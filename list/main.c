@@ -38,7 +38,7 @@ int main()
     printf("\n\n");
     // test_list_removeAt();
     printf("\n\n");
-    // test_list_remove();
+    test_list_remove();
     printf("\n\n");
     // test_list_replace();
     printf("\n\n");
@@ -191,17 +191,17 @@ void test_list_removeAt() {
     list_print(l);
     verify(list_removeAt(l, 0, &output) == true, "Should return 'true' because the first element was removed");
     verify(output == 1, "The removed element should be equals 1");
-    verify(list_size(l) == 4, "The list should contains 4 elements before remotion");
+    verify(list_size(l) == 4, "The list should contains 4 elements after remotion");
 
     list_print(l);
     verify(list_removeAt(l, 3, &output) == true, "Should return 'true' because the last element was removed");
     verify(output == 5, "The removed element should be equals 5");
-    verify(list_size(l) == 3, "The list should contains 3 elements before remotion");
+    verify(list_size(l) == 3, "The list should contains 3 elements after remotion");
     
     list_print(l);
     verify(list_removeAt(l, 1, &output) == true, "Should return 'true' because the middle element was removed");
     verify(output == 3, "The removed element should be equals 3");
-    verify(list_size(l) == 2, "The list should contains 2 elements before remotion");
+    verify(list_size(l) == 2, "The list should contains 2 elements after remotion");
 
     list_removeAt(l, 0, &output);
     list_removeAt(l, 0, &output);
@@ -210,3 +210,44 @@ void test_list_removeAt() {
 
     list_destroy(&l);
 }
+
+void test_list_remove() {
+    printf("/***********************************************\n");
+    printf("TEST: REMOVE \n");
+    printf("/***********************************************\n\n");
+    
+    List* l = NULL;
+
+    verify(list_remove(l, 0) == -1, "Should return '-1' because the list is NULL");
+
+    l = list_create();
+
+    verify(list_remove(l, 0) == -1, "Should return '-1' because the list is empty");
+
+    for (int i = 1; i <= 5; i++) {
+        list_append(l, i);
+    }
+
+    verify(list_remove(l, 0) == -1, "Should return '-1' because 0 is not in the list");
+
+    // list_print(l);
+    verify(list_remove(l, 1) == 0, "Should return '0' because the first element was removed");    
+    verify(list_size(l) == 4, "The list should contains 4 elements after remotion");
+
+    // list_print(l);
+    verify(list_remove(l, 5) == 3, "Should return '3' because the last element was removed");
+    verify(list_size(l) == 3, "The list should contains 3 elements after remotion");
+    
+    // list_print(l);
+    verify(list_remove(l, 3) == 1, "Should return '1' because the middle element was removed");
+    verify(list_size(l) == 2, "The list should contains 2 elements after remotion");
+
+    // list_print(l);
+    list_remove(l, 4);
+    list_remove(l, 2);
+    
+    verify(list_isEmpty(l), "The list should be empty");
+
+    list_destroy(&l);
+}
+
