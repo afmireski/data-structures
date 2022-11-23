@@ -40,7 +40,7 @@ int main()
     printf("\n\n");
     // test_list_removeAt();
     printf("\n\n");
-    // test_list_remove();
+    test_list_remove();
     printf("\n\n");
     // test_list_indexOf();
     printf("\n\n");

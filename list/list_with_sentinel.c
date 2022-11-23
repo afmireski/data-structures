@@ -203,70 +203,47 @@ bool list_removeAt(List *l, int index, any *output)
 
 int list_remove(List *l, any element)
 {
-    // if (l == NULL)
-    // {
-    //     printf("Error, the list cannot be null!!!\n");
-    //     return -1;
-    // }
-    // else if (l->qty == 0)
-    // {
-    //     printf("Error, the list is empty!!!\n");
-    //     return -1;
-    // }
+    if (l == NULL)
+    {
+        printf("Error, the list cannot be null!!!\n");
+        return -1;
+    }
+    else if (l->qty == 0)
+    {
+        printf("Error, the list is empty!!!\n");
+        return -1;
+    }
 
-    // Node *temp = l->begin;
+    Node *temp = l->sentinel->next;
 
-    // // Encontra o Node que abriga o element informado
-    // int i;
-    // bool hasElement = false;
-    // for (i = 0; i < l->qty; i++)
-    // {
-    //     if (temp->data == element)
-    //     {
-    //         hasElement = true;
-    //         break;
-    //     }
-    //     temp = temp->next;
-    // }
+    // Encontra o Node que abriga o element informado
+    int i;
+    bool hasElement = false;
+    for (i = 0; i < l->qty; i++)
+    {
+        if (temp->data == element)
+        {
+            hasElement = true;
+            break;
+        }
+        temp = temp->next;
+    }
 
-    // if (!hasElement)
-    // {
-    //     printf("Error, %d not found!!!\n", element);
-    //     return -1;
-    // }
+    if (!hasElement)
+    {
+        printf("Error, %d not found!!!\n", element);
+        return -1;
+    }
 
-    // if (i == 0)
-    // {
-    //     l->begin = temp->next;
-    //     if (temp->next != NULL)
-    //     {
-    //         temp->next->back = NULL;
-    //         temp->next = NULL;
-    //     }
-    // }
-    // else if (i == l->qty - 1)
-    // {
-    //     l->end = temp->back;
-    //     temp->back->next = NULL;
-    //     temp->back = NULL;
-    // }
-    // else
-    // {
-    //     temp->back->next = temp->next;
-    //     temp->next->back = temp->back;
-    //     temp->back = NULL;
-    //     temp->next = NULL;
-    // }
+    temp->back->next = temp->next;
+    temp->next->back = temp->back;
+    temp->back = NULL;
+    temp->next = NULL;
 
-    // free(temp);
-    // l->qty--;
+    free(temp);
+    l->qty--;
 
-    // if (l->qty == 0)
-    // {
-    //     l->end = NULL;
-    // }
-
-    // return i;
+    return i;
 }
 
 bool list_replace(List *l, int index, any newElement)
