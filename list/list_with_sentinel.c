@@ -69,26 +69,26 @@ void list_destroy(List **address)
 
 void list_print(List *l)
 {
-    // if (l == NULL)
-    // {
-    //     printf("Error, the list cannot be null!!!\n");
-    // }
-    // else if (l->qty == 0)
-    // {
-    //     printf("Error, the list is empty!!!\n");
-    // }
-    // else
-    // {
-    //     Node *temp = l->begin;
+    if (l == NULL)
+    {
+        printf("Error, the list cannot be null!!!\n");
+    }
+    else if (l->qty == 0)
+    {
+        printf("Error, the list is empty!!!\n");
+    }
+    else
+    {
+        Node *temp = l->sentinel->next;
 
-    //     printf("[");
-    //     while (temp != NULL)
-    //     {
-    //         printf("%d, ", temp->data);
-    //         temp = temp->next;
-    //     }
-    //     printf("\b\b]\n");
-    // }
+        printf("[");
+        while (temp != l->sentinel)
+        {
+            printf("%d, ", temp->data);
+            temp = temp->next;
+        }
+        printf("\b\b]\n");
+    }
 }
 
 int list_size(List *l)

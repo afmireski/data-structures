@@ -30,9 +30,9 @@ int main()
     printf("/***********************************************\n");
     printf("LIST\n");
     printf("/***********************************************\n\n");
-    test_list_create_and_destroy();
+    // test_list_create_and_destroy();
     printf("\n\n");
-    // test_list_append();
+    test_list_append();
     printf("\n\n");
     // test_list_isEmpty();
     printf("\n\n");
