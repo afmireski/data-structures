@@ -28,13 +28,23 @@ struct list
 /***********************************************
 | ACTIONS
 ************************************************/
+Node *newNode(any value, Node *back, Node *next)
+{
+    Node *node = (Node *)malloc(sizeof(Node));
+    node->data = value;
+    node->back = back;
+    node->next = next;
+
+    return node;
+}
+
 List *list_create()
 {
     List *l = (List *)malloc(sizeof(List));
 
     l->sentinel = newNode(0, NULL, NULL);
-    l->sentinel->next = &l->sentinel;
-    l->sentinel->back = &l->sentinel;
+    l->sentinel->next = l->sentinel;
+    l->sentinel->back = l->sentinel;
     l->qty = 0;
 
     return l;
@@ -55,16 +65,6 @@ void list_destroy(List **address)
     free(sentinel);
     free(*address);
     *address = NULL;
-}
-
-Node *newNode(any value, Node *back, Node *next)
-{
-    Node *node = (Node *)malloc(sizeof(Node));
-    node->data = value;
-    node->back = back;
-    node->next = next;
-
-    return node;
 }
 
 void list_print(List *l)
