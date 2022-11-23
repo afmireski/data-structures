@@ -264,11 +264,7 @@ bool list_replace(List *l, int index, any newElement)
         return false;
     }
 
-    Node *temp = l->sentinel->next;
-    for (int i = 0; i < index; i++)
-    {
-        temp = temp->next;
-    }
+    Node *temp = findNode(l, index);
 
     temp->data = newElement;
     return true;
@@ -301,31 +297,27 @@ int list_indexOf(List *l, any element)
 
 bool list_returnAt(List *l, int index, any *output)
 {
-    // if (l == NULL)
-    // {
-    //     printf("Error, the list cannot be null!!!\n");
-    //     return false;
-    // }
-    // else if (l->qty == 0)
-    // {
-    //     printf("Error, the list is empty!!!\n");
-    //     return false;
-    // }
-    // else if (index < 0 || index >= l->qty)
-    // {
-    //     printf("Error, the index should be into the interval [0, %d]!!!\n", l->qty - 1);
-    //     return false;
-    // }
+    if (l == NULL)
+    {
+        printf("Error, the list cannot be null!!!\n");
+        return false;
+    }
+    else if (l->qty == 0)
+    {
+        printf("Error, the list is empty!!!\n");
+        return false;
+    }
+    else if (index < 0 || index >= l->qty)
+    {
+        printf("Error, the index should be into the interval [0, %d]!!!\n", l->qty - 1);
+        return false;
+    }
 
-    // Node *temp = l->begin;
-    // for (int i = 0; i < index; i++)
-    // {
-    //     temp = temp->next;
-    // }
+    Node *temp = findNode(l, index);
 
-    // *output = temp->data;
+    *output = temp->data;
 
-    // return true;
+    return true;
 }
 
 bool list_toString(List *l, char *str)
