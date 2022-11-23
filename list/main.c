@@ -36,7 +36,7 @@ int main()
     printf("\n\n");
     // test_list_isEmpty();
     printf("\n\n");
-    test_list_insert();
+    // test_list_insert();
     printf("\n\n");
     // test_list_removeAt();
     printf("\n\n");
@@ -216,6 +216,7 @@ void test_list_removeAt()
     verify(output == 3, "The removed element should be equals 3");
     verify(list_size(l) == 2, "The list should contains 2 elements after remotion");
 
+    // list_print(l);
     list_removeAt(l, 0, &output);
     list_removeAt(l, 0, &output);
 
