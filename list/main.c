@@ -40,13 +40,13 @@ int main()
     printf("\n\n");
     // test_list_removeAt();
     printf("\n\n");
-    test_list_remove();
+    // test_list_remove();
     printf("\n\n");
-    // test_list_indexOf();
+    test_list_indexOf();
     printf("\n\n");
     // test_list_returnAt();
     printf("\n\n");
-    // test_list_replace();
+    test_list_replace();
     printf("\n\n");
     // test_list_toString();
     printf("/****************** END ********************/\n");
@@ -290,7 +290,7 @@ void test_list_indexOf()
 
     verify(list_indexOf(l, 1) == 0, "Should return '0' because '1' is in this index");
     verify(list_indexOf(l, 5) == 4, "Should return '4' because '5' is in this index");
-    verify(list_indexOf(l, 2) == 1, "Should return '1' because '1' is in this index");
+    verify(list_indexOf(l, 2) == 1, "Should return '1' because '2' is in this index");
     verify(list_indexOf(l, 3) == 2, "Should return '2' because '3' is in this index");
     verify(list_indexOf(l, 4) == 3, "Should return '3' because '4' is in this index");
 

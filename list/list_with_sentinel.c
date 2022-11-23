@@ -248,55 +248,55 @@ int list_remove(List *l, any element)
 
 bool list_replace(List *l, int index, any newElement)
 {
-    // if (l == NULL)
-    // {
-    //     printf("Error, the list cannot be null!!!\n");
-    //     return false;
-    // }
-    // else if (l->qty == 0)
-    // {
-    //     printf("Error, the list is empty!!!\n");
-    //     return false;
-    // }
-    // else if (index < 0 || index >= l->qty)
-    // {
-    //     printf("Error, the index should be into the interval [0, %d]!!!\n", l->qty - 1);
-    //     return false;
-    // }
+    if (l == NULL)
+    {
+        printf("Error, the list cannot be null!!!\n");
+        return false;
+    }
+    else if (l->qty == 0)
+    {
+        printf("Error, the list is empty!!!\n");
+        return false;
+    }
+    else if (index < 0 || index >= l->qty)
+    {
+        printf("Error, the index should be into the interval [0, %d]!!!\n", l->qty - 1);
+        return false;
+    }
 
-    // Node *temp = l->begin;
-    // for (int i = 0; i < index; i++)
-    // {
-    //     temp = temp->next;
-    // }
+    Node *temp = l->sentinel->next;
+    for (int i = 0; i < index; i++)
+    {
+        temp = temp->next;
+    }
 
-    // temp->data = newElement;
-    // return true;
+    temp->data = newElement;
+    return true;
 }
 
 int list_indexOf(List *l, any element)
 {
-    // if (l == NULL)
-    // {
-    //     printf("Error, the list cannot be null!!!\n");
-    //     return -1;
-    // }
-    // else if (l->qty == 0)
-    // {
-    //     printf("Error, the list is empty!!!\n");
-    //     return -1;
-    // }
+    if (l == NULL)
+    {
+        printf("Error, the list cannot be null!!!\n");
+        return -1;
+    }
+    else if (l->qty == 0)
+    {
+        printf("Error, the list is empty!!!\n");
+        return -1;
+    }
 
-    // Node *temp = l->begin;
-    // for (int i = 0; i < l->qty; i++)
-    // {
-    //     if (temp->data == element)
-    //         return i;
+    Node *temp = l->sentinel->next;
+    for (int i = 0; i < l->qty; i++)
+    {
+        if (temp->data == element)
+            return i;
 
-    //     temp = temp->next;
-    // }
+        temp = temp->next;
+    }
 
-    // return -1;
+    return -1;
 }
 
 bool list_returnAt(List *l, int index, any *output)
