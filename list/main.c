@@ -46,9 +46,9 @@ int main()
     printf("\n\n");
     // test_list_returnAt();
     printf("\n\n");
-    test_list_replace();
+    // test_list_replace();
     printf("\n\n");
-    // test_list_toString();
+    test_list_toString();
     printf("/****************** END ********************/\n");
 
     return 0;

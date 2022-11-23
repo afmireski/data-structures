@@ -322,34 +322,34 @@ bool list_returnAt(List *l, int index, any *output)
 
 bool list_toString(List *l, char *str)
 {
-    // if (l == NULL)
-    // {
-    //     printf("Error, the list cannot be null!!!\n");
-    //     return false;
-    // }
-    // else if (l->qty == 0)
-    // {
-    //     printf("Error, the list is empty!!!\n");
-    //     return false;
-    // }
+    if (l == NULL)
+    {
+        printf("Error, the list cannot be null!!!\n");
+        return false;
+    }
+    else if (l->qty == 0)
+    {
+        printf("Error, the list is empty!!!\n");
+        return false;
+    }
 
-    // char buffer[50];
+    char buffer[50];
 
-    // *str = '\0';
-    // strcat(str, "[");
+    *str = '\0';
+    strcat(str, "[");
 
-    // Node *temp = l->begin;
-    // while (temp != NULL)
-    // {
-    //     sprintf(buffer, "%d", temp->data);
-    //     strcat(str, buffer);
-    //     if (temp->next != NULL)
-    //     {
-    //         strcat(str, ", ");
-    //     }
-    //     temp = temp->next;
-    // }
-    // strcat(str, "]");
+    Node *temp = l->sentinel->next;
+    while (temp != l->sentinel)
+    {
+        sprintf(buffer, "%d", temp->data);
+        strcat(str, buffer);
+        if (temp->next != l->sentinel)
+        {
+            strcat(str, ", ");
+        }
+        temp = temp->next;
+    }
+    strcat(str, "]");
 
-    // return true;
+    return true;
 }
