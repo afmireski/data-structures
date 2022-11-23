@@ -38,6 +38,17 @@ Node *newNode(any value, Node *back, Node *next)
     return node;
 }
 
+Node *findNode(List *l, int index)
+{
+    Node *temp = l->sentinel->next;
+    for (int i = 0; i < index; i++)
+    {
+        temp = temp->next;
+    }
+
+    return temp;
+}
+
 List *list_create()
 {
     List *l = (List *)malloc(sizeof(List));
@@ -52,7 +63,7 @@ List *list_create()
 
 void list_destroy(List **address)
 {
-    Node* sentinel = (*address)->sentinel;
+    Node *sentinel = (*address)->sentinel;
     Node *temp = sentinel->next;
     Node *aux;
 
@@ -120,7 +131,7 @@ bool list_append(List *l, any element)
         return false;
     }
 
-    Node* sentinel = l->sentinel;
+    Node *sentinel = l->sentinel;
     Node *new = newNode(element, NULL, sentinel);
 
     new->back = sentinel->back;
@@ -147,38 +158,12 @@ bool list_insert(List *l, any element, int index)
 
     Node *new = newNode(element, NULL, NULL);
 
-    // if (l->qty == 0)
-    // {
-    //     l->begin = new;
-    //     l->end = new;
-    // }
-    // else if (index == 0)
-    // {
-    //     new->next = l->begin;
-    //     l->begin->back = new;
-    //     l->begin = new;
-    // }
-    // else if (index == l->qty)
-    // {
-    //     new->back = l->end;
-    //     l->end->next = new;
-    //     l->end = new;
-    // }
-    // else
-    // {
-    //     Node *temp = l->begin;
+    Node *temp = findNode(l, index);
 
-    //     // Encontra o Node atual da posição index
-    //     for (int i = 0; i < index; i++)
-    //     {
-    //         temp = temp->next;
-    //     }
-
-    //     new->next = temp;
-    //     new->back = temp->back;
-    //     temp->back = new;
-    //     new->back->next = new;
-    // }
+    new->next = temp;
+    new->back = temp->back;
+    temp->back = new;
+    new->back->next = new;
 
     l->qty++;
     return true;

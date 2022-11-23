@@ -32,11 +32,11 @@ int main()
     printf("/***********************************************\n\n");
     // test_list_create_and_destroy();
     printf("\n\n");
-    test_list_append();
+    // test_list_append();
     printf("\n\n");
     // test_list_isEmpty();
     printf("\n\n");
-    // test_list_insert();
+    test_list_insert();
     printf("\n\n");
     // test_list_removeAt();
     printf("\n\n");
