@@ -100,12 +100,12 @@ void test_list_append()
     l = list_create();
 
     verify(list_append(l, element) == true, "Should return 'true' and add the first element (1)");
-    // list_print(l);
+    list_print(l);
 
     element = 2;
 
     verify(list_append(l, element) == true, "Should return 'true' and add a new element (2)");
-    // list_print(l);
+    list_print(l);
 
     verify(list_size(l) == 2, "The list should contain two elements");
 

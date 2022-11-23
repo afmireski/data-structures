@@ -114,27 +114,22 @@ bool list_isEmpty(List *l)
 
 bool list_append(List *l, any element)
 {
-    // if (l == NULL)
-    // {
-    //     printf("Error, the list cannot be null!!!\n");
-    //     return false;
-    // }
+    if (l == NULL)
+    {
+        printf("Error, the list cannot be null!!!\n");
+        return false;
+    }
 
-    // Node *new = newNode(element, l->end, NULL);
+    Node* sentinel = l->sentinel;
+    Node *new = newNode(element, NULL, sentinel);
 
-    // if (l->qty == 0)
-    // {
-    //     l->begin = new;
-    // }
-    // else
-    // {
-    //     l->end->next = new;
-    // }
+    new->back = sentinel->back;
+    sentinel->back->next = new;
+    sentinel->back = new;
 
-    // l->end = new;
-    // l->qty++;
+    l->qty++;
 
-    // return true;
+    return true;
 }
 
 bool list_insert(List *l, any element, int index)
