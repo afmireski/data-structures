@@ -100,12 +100,12 @@ void test_list_append()
     l = list_create();
 
     verify(list_append(l, element) == true, "Should return 'true' and add the first element (1)");
-    // list_print(l);
+    list_print(l);
 
     element = 2;
 
     verify(list_append(l, element) == true, "Should return 'true' and add a new element (2)");
-    // list_print(l);
+    list_print(l);
 
     verify(list_size(l) == 2, "The list should contain two elements");
 
@@ -216,6 +216,7 @@ void test_list_removeAt()
     verify(output == 3, "The removed element should be equals 3");
     verify(list_size(l) == 2, "The list should contains 2 elements after remotion");
 
+    // list_print(l);
     list_removeAt(l, 0, &output);
     list_removeAt(l, 0, &output);
 
@@ -289,7 +290,7 @@ void test_list_indexOf()
 
     verify(list_indexOf(l, 1) == 0, "Should return '0' because '1' is in this index");
     verify(list_indexOf(l, 5) == 4, "Should return '4' because '5' is in this index");
-    verify(list_indexOf(l, 2) == 1, "Should return '1' because '1' is in this index");
+    verify(list_indexOf(l, 2) == 1, "Should return '1' because '2' is in this index");
     verify(list_indexOf(l, 3) == 2, "Should return '2' because '3' is in this index");
     verify(list_indexOf(l, 4) == 3, "Should return '3' because '4' is in this index");
 
